@@ -14,15 +14,17 @@
 3. Clear the output from the history
 - history
 >
+```
 28  printf '%s' 'mypwd' | sha256sum
 29   history
 30  history -d 30 && history -w
 31  printf '%s' 'mypwd' | sha256sum
 32  history
+```
 - `history -d numberoflastitem && history -w`
 
 # How to stack deploy
-- docker build -t mybuild:1 .
+- `docker build -t mybuild:1 .`
 - edit docker-compose.yml to refer now to that image name:
 ```yaml
 services:
@@ -30,13 +32,13 @@ services:
     image: mybuild:1
 ```
 
-- docker stack deploy --compose-file=docker-compose.yml secret_test
-- docker service ls
+- `docker stack deploy --compose-file=docker-compose.yml secret_test` 
+- `docker service ls`
 krksqavjzsnx   secret_test_postgres-example-pg-hba   replicated   1/1        image:s   *:5432->5432/tcp
-- docker ps
+- `docker ps -a`
 42e55f728b49   mybuild:1   "docker-entrypoint.s…"   12 minutes ago   Up 12 minutes   5432/tcp   secret_test_postgres-example-pg-hba.1.v5z265k9t0ftbullxd89ng8b0
 
-- docker exec -it 42e55f728b49 psql -U mysuperuser -d mydb
+- `docker exec -it 42e55f728b49 psql -U mysuperuser -d mydb`
 - Asks for password: [type] mypassword
 copy password and just right click into the terminal and press enter
 
@@ -55,3 +57,7 @@ done!
 - exit
 \q
 CTRL C
+
+
+# How to interact with db via node-app?
+TODO
