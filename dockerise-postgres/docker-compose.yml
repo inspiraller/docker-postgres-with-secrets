@@ -1,0 +1,20 @@
+
+services:
+  postgres-example-pg-hba:
+    image: mybuild:1
+    secrets: 
+      - pg_password
+    environment:
+      - POSTGRES_DB=mydb
+      - POSTGRES_USER=mysuperuser
+      - POSTGRES_PASSWORD_FILE=/run/secrets/pg_password
+    build:
+      context: .
+    ports:
+          - "5432:5432"
+    restart: unless-stopped
+
+secrets:
+  pg_password:
+    external: true
+
