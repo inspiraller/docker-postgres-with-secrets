@@ -40,4 +40,29 @@ docker restart db08a2575b24
 8. rerun
 `npm start`
 
+expect
+```
+[nodemon] starting `ts-node -r dotenv/config src/slonik-server.ts dotenv_config_path=.env`
+CREATE POOL..
+DB exists = { isExist: true }
+TABLE ROWS {
+  resultRows: {
+    command: 'SELECT',
+    fields: [ [Object], [Object], [Object] ],
+    notices: [],
+    rowCount: 4,
+    rows: [ [Object], [Object], [Object], [Object] ]
+  }
+}
+[nodemon] clean exit - waiting for changes before restart
+```
+done!
+
+9. `npm run test`
+```
+PASS  __tests__/dockerise-postgres/container-connection.test.ts                                                                         
+  dockerise postgres connection test
+    √ opens connection to docker postgres (67 ms)                                                                                        
+    √ runs sql query on connection (67 ms)          
+```
 done!
