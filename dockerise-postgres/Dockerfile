@@ -33,9 +33,10 @@ RUN chmod 400 /temp/ssl/server.crt
 RUN chown postgres:postgres /temp/ssl/server.crt
 
 # conf files ownership
-RUN chown postgres:postgres /temp/conf/postgresql.conf
-RUN chown postgres:postgres /temp/conf/pg_hba.conf
+# RUN chown postgres:postgres /temp/conf/postgresql.conf
+# RUN chown postgres:postgres /temp/conf/pg_hba.conf
 COPY ./scripts/copy-conf.sh /docker-entrypoint-initdb.d/copy-conf.sh
 
-CMD ["-c","ssl=on", "-c","ssl_cert_file=/temp/ssl/server.crt","-c","ssl_key_file=/temp/ssl/server.key","-c","ssl_ca_file=/temp/ssl/root.crt"]
+ENTRYPOINT ["docker-entrypoint.sh","-c", "ssl=on", "-c","ssl_cert_file=/temp/ssl/server.crt","-c","ssl_key_file=/temp/ssl/server.key","-c","ssl_ca_file=/temp/ssl/root.crt"]
+# CMD ["-c", "ssl=on", "-c","ssl_cert_file=/temp/ssl/server.crt","-c","ssl_key_file=/temp/ssl/server.key","-c","ssl_ca_file=/temp/ssl/root.crt"]
 
