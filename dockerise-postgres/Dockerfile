@@ -1,6 +1,10 @@
 FROM postgres:latest
 
-# copy-data.sh
+# copy-data.sh  
+# postgresql_data/
+#   conf/
+#   data/
+#   ssl/
 COPY ./postgresql_data ./temp
 
 # Copy init.table.csv to /var/lib/postgresql/data/init.table.csv 
@@ -21,19 +25,20 @@ COPY ./scripts/seed.sql /docker-entrypoint-initdb.d/seed.sql
 
 
 ##  Set ssl permission
+# Note: Don't need to move these anywhere - can refer to them via the cmd 
 RUN chmod 400 /temp/ssl/server.key
 RUN chown postgres:postgres /temp/ssl/server.key
 
 RUN chmod 400 /temp/ssl/server.crt
 RUN chown postgres:postgres /temp/ssl/server.crt
 
-# sym-conf.sh
-# To ensure pg_hba and postgresql.conf override the default postgres initialisation.
-# Symlink these to: poastgresql_data/conf
-# - pg_hba.conf
-# - postgresql.conf
+# conf files ownership
+RUN chmod 400 /temp/conf/postgresql.conf
+RUN chown postgres:postgres /temp/conf/postgresql.conf
 
-COPY ./scripts/sym-conf.sh /docker-entrypoint-initdb.d/sym-conf.sh
+RUN chmod 400 /temp/conf/pg_hba.conf
+RUN chown postgres:postgres /temp/conf/pg_hba.conf
+COPY ./scripts/copy-conf.sh /docker-entrypoint-initdb.d/copy-conf.sh
 
 CMD ["-c","ssl=on", "-c","ssl_cert_file=/temp/ssl/server.crt","-c","ssl_key_file=/temp/ssl/server.key","-c","ssl_ca_file=/temp/ssl/root.crt"]
 

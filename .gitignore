@@ -2,7 +2,3 @@ dockerise-postgres/postgresql_data/ssl/*
 ssl/*
 node_modules
 coverage
-node-app
-
-# To fix
-README-node-app-to-postgres.md

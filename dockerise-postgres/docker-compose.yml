@@ -1,7 +1,7 @@
 
 services:
   postgres-example-pg-hba:
-    image: mybuild:1
+    image: postgres:1
     secrets: 
       - pg_password
     environment:
