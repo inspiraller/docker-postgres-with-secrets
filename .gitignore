@@ -2,3 +2,5 @@ dockerise-postgres/postgresql_data/ssl/*
 ssl/*
 node_modules
 coverage
+.env
+pnpm-lock.yaml
