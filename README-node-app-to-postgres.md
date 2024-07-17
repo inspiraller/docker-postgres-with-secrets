@@ -1,8 +1,21 @@
-# install
-pnpm i
+# What does node-app do
+This is an example of how to interact with the postgres database setup via instruction via the the root README.md
+This will simply make a connection to the host and authenticate via ssl, using .env variables and then run a sql command to display the table to via the terminal.
 
-# pnpm start
-pnpm run start
+#### pre-requisites
+- setup docker postgres
+- nodej
+- npm, pnpm or yarn
+
+#### copy .env.example to .env
+- `cd node-app`
+- `cp .env.example .env`
+
+#### install
+npm i
+
+#### pnpm start
+npm run start
 
 > troubleshoot: name === 'notice' ? new NoticeMessage(length, messageValue) : new DatabaseError(messageValue, length, name)
                                                                     ^
@@ -23,3 +36,8 @@ docker restart db08a2575b24
 > cydnyg30y0d5   secret_test_postgres-example-pg-hba   replicated   1/1        mybuild:1   *:5432->5432/tcp
 6. docker service rm cydnyg30y0d5
 7. docker stack deploy --compose-file=docker-compose.yml secret_test
+
+8. rerun
+`npm start`
+
+done!
